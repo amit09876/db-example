@@ -1,5 +1,6 @@
 package net.simplifiedcoding.dbexample;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -29,4 +30,18 @@ public class DbHandler extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
     }
+
+    public boolean addStudent(Student student){
+        SQLiteDatabase db = getWritableDatabase();
+
+        ContentValues cv = new ContentValues();
+        cv.put("name", student.getName());
+        cv.put("class", student.getsClass());
+        cv.put("session", student.getSession());
+
+        db.insert("students", null, cv);
+
+        return true;
+    }
+
 }
